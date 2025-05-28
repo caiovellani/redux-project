@@ -17,4 +17,5 @@ The purpose of this project is to understand how Redux works, including:
 - React
 - Redux
 - React-Redux
+- Redux Saga
 - Vite (for project setup and bundling)
