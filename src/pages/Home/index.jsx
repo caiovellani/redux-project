@@ -2,7 +2,11 @@ import styles from './home.module.css'
 import { Header } from '../../components/header'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteAddress, fetchUsers } from '../../redux/user/slice'
+import {
+  deleteAddress,
+  fetchUserById,
+  fetchUsers,
+} from '../../redux/user/slice'
 
 export function Home() {
   const dispatch = useDispatch()
@@ -17,6 +21,12 @@ export function Home() {
 
   function handleFetchUsers() {
     dispatch(fetchUsers())
+  }
+
+  function handleFetchUserById() {
+    const userId = 5
+
+    dispatch(fetchUserById(userId))
   }
 
   return (
@@ -58,6 +68,13 @@ export function Home() {
               </>
             )}
             <hr />
+            <br />
+
+            <h2>Lista de usuários</h2>
+            <button onClick={handleFetchUsers}>Buscar usuários</button>
+            <button onClick={handleFetchUserById}>
+              Buscar usuários com o ID
+            </button>
             <br />
 
             <h2>Lista de usuários</h2>

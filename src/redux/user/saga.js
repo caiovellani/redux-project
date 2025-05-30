@@ -28,11 +28,12 @@ function* fetchUsers() {
   }
 }
 
-function* fetchUserById() {
+function* fetchUserById(action) {
   try {
+    const userId = action.payload
     const response = yield call(
       axios.get,
-      'https://jsonplaceholder.typicode.com/users/4'
+      `https://jsonplaceholder.typicode.com/users/${userId}`
     )
     yield put(fetchUserByIdSuccess(response.data))
   } catch (err) {
