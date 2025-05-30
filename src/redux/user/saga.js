@@ -1,5 +1,17 @@
-import { all, takeEvery, call, put, delay } from 'react-saga/effects'
-import { fetchUsersSuccess, fetchUsersFailure } from './slice'
+import {
+  takeEvery,
+  all,
+  call,
+  put,
+  delay,
+  takeLatest,
+} from 'redux-saga/effects'
+import {
+  fetchUsersSuccess,
+  fetchUsersFailure,
+  fetchUserByIdSuccess,
+  fetchUserByIdFailure,
+} from './slice'
 import axios from 'axios'
 
 function* fetchUsers() {
@@ -16,4 +28,22 @@ function* fetchUsers() {
   }
 }
 
-export default all([takeEvery('user/fetchUsers', fetchUsers)])
+function* fetchUserById() {
+  try {
+    const response = yield call(
+      axios.get,
+      'https://jsonplaceholder.typicode.com/users/4'
+    )
+    yield put(fetchUserByIdSuccess(response.data))
+  } catch (err) {
+    yield put(fetchUserByIdFailure(err.message))
+  }
+}
+
+export default all([
+  takeLatest(
+    'user/fetchUsers',
+    fetchUsers,
+    takeEvery('user/fetchUserById', fetchUserById)
+  ),
+])

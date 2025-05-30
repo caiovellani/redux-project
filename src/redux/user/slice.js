@@ -83,6 +83,16 @@ export const userSlice = createSlice({
       console.log(action.payload)
       state.loading = false
     },
+    fetchUserById: (state, action) => {
+      console.log('Chamou no Slice')
+    },
+    fetchUserByIdSuccess: (state, action) => {
+      console.log('User do id')
+      console.log(action.payload)
+    },
+    fetchUserByIdFailure: (state) => {
+      console.log('Deu erro no fetchByID')
+    },
   },
 })
 
@@ -94,5 +104,8 @@ export const {
   fetchUsers,
   fetchUsersSuccess,
   fetchUsersFailure,
+  fetchUserById,
+  fetchUserByIdSuccess,
+  fetchUserByIdFailure,
 } = userSlice.actions
 export default userSlice.reducer
