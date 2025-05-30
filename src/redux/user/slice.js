@@ -4,6 +4,7 @@ const initialState = {
   user: {
     user: null,
     users: [],
+    loading: false,
   },
 }
 
@@ -70,13 +71,17 @@ export const userSlice = createSlice({
         },
       }
     },
-    fetchUsers: (state) => {},
+    fetchUsers: (state) => {
+      state.loading = true
+    },
     fetchUsersSuccess: (state, action) => {
       state.users = action.payload
+      state.loading = false
     },
     fetchUsersFailure: (state, action) => {
       console.log('Error')
       console.log(action.payload)
+      state.loading = false
     },
   },
 })
